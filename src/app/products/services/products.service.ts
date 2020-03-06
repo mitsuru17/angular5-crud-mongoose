@@ -10,20 +10,20 @@ import { Product } from '../models/product';
 export class ProductsService {
     private url = 'http://localhost:3000/api/products/';
 
-    private list = new Subject<Product[]>();
-    list$ = this.list.asObservable();
+    // private list = new Subject<Product[]>();
+    // list$ = this.list.asObservable();
 
-    private loadingList = new BehaviorSubject<boolean>(false);
-    loadingList$ = this.loadingList.asObservable();
+    // private loadingList = new BehaviorSubject<boolean>(false);
+    // loadingList$ = this.loadingList.asObservable();
 
-    private inserted = new BehaviorSubject<boolean>(false);
-    inserted$ = this.inserted.asObservable();
+    // private inserted = new BehaviorSubject<boolean>(false);
+    // inserted$ = this.inserted.asObservable();
 
-    private updated = new BehaviorSubject<boolean>(false);
-    updated$ = this.updated.asObservable();
+    // private updated = new BehaviorSubject<boolean>(false);
+    // updated$ = this.updated.asObservable();
 
-    private deleted = new BehaviorSubject<boolean>(false);
-    deleted$ = this.deleted.asObservable();
+    // private deleted = new BehaviorSubject<boolean>(false);
+    // deleted$ = this.deleted.asObservable();
 
     private headers = new Headers({
         'Content-Type': 'application/json'
@@ -32,15 +32,21 @@ export class ProductsService {
     constructor(private http: HttpClient) { }
 
 
+    // getAll() {
+    //     this.loadingList.next(true);
+    //     this.http.get(this.url).pipe(
+    //         map((res: any) => this.list.next(res)))
+    //         .finally(() => this.loadingList.next(false))
+    //         .catch((error: any) => {
+    //             this.list.error(new Error(error || 'Server error'));
+    //             return observableThrowError(error.json().error || 'Server error');
+    //         }).subscribe();
+    // }
+
     getAll() {
-        this.loadingList.next(true);
-        this.http.get(this.url).pipe(
-            map((res: any) => this.list.next(res)))
-            .finally(() => this.loadingList.next(false))
-            .catch((error: any) => {
-                this.list.error(new Error(error || 'Server error'));
-                return observableThrowError(error.json().error || 'Server error');
-            }).subscribe();
+        // this.loadingList.next(true);
+        return this.http.get<any>(this.url).toPromise();
+            // .pipe(map(data => data)).toPromise();
     }
 
     // getAll(): Observable<any> {

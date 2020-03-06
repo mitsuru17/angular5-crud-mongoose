@@ -6,7 +6,6 @@ import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { ProductsModalViewComponent } from '../products-modal-view/products-modal-view.component'
 import { ProductsModalEditComponent } from '../products-modal-edit/products-modal-edit.component'
 
-
 @Component({
     selector: 'app-products-list-item',
     templateUrl: './products-list-item.component.html',

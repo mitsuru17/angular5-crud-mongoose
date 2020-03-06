@@ -18,60 +18,62 @@ export class ProductsListComponent implements OnInit {
     inserted: boolean;
 
     constructor(private productService: ProductsService, private modalService: BsModalService) {
-        this.productService.list$.subscribe(
-            data => {
-                this.productList = data;
-            },
-            err => {
-                console.log('Error getting list (check node server) ', err);
-            });
-        this.productService.loadingList$.subscribe(
-            response => this.loading = response
-        );
-        this.productService.inserted$.subscribe(
-            response => {
-                if (response === true) {
-                    this.alerts.push({
-                        type: 'md-local',
-                        msg: `Product added correctly`,
-                        timeout: 6000
-                    });
-                    this.loadData();
-                }
-            }
-        );
-        this.productService.updated$.subscribe(
-            response => {
-                if (response === true) {
-                    this.alerts.push({
-                        type: 'warning',
-                        msg: `Product updated correctly`,
-                        timeout: 6000
-                    });
-                    this.loadData();
-                }
-            }
-        );
-        this.productService.deleted$.subscribe(
-            response => {
-                if (response === true) {
-                    this.alerts.push({
-                        type: 'danger',
-                        msg: `Product deleted correctly`,
-                        timeout: 6000
-                    });
-                    this.loadData();
-                }
-            }
-        );
+
+        // this.productService.list$.subscribe(
+        //     data => {
+        //         this.productList = data;
+        //     },
+        //     err => {
+        //         console.log('Error getting list (check node server) ', err);
+        //     });
+        // this.productService.loadingList$.subscribe(
+        //     response => this.loading = response
+        // );
+        // this.productService.inserted$.subscribe(
+        //     response => {
+        //         if (response === true) {
+        //             this.alerts.push({
+        //                 type: 'md-local',
+        //                 msg: `Product added correctly`,
+        //                 timeout: 6000
+        //             });
+        //             this.loadData();
+        //         }
+        //     }
+        // );
+        // this.productService.updated$.subscribe(
+        //     response => {
+        //         if (response === true) {
+        //             this.alerts.push({
+        //                 type: 'warning',
+        //                 msg: `Product updated correctly`,
+        //                 timeout: 6000
+        //             });
+        //             this.loadData();
+        //         }
+        //     }
+        // );
+        // this.productService.deleted$.subscribe(
+        //     response => {
+        //         if (response === true) {
+        //             this.alerts.push({
+        //                 type: 'danger',
+        //                 msg: `Product deleted correctly`,
+        //                 timeout: 6000
+        //             });
+        //             this.loadData();
+        //         }
+        //     }
+        // );
     }
 
-    ngOnInit() {
-        this.loadData();
+    async ngOnInit() {
+        await this.loadData();
     }
 
-    loadData() {
-        this.productService.getAll();
+    async loadData() {
+      this.productList = await this.productService.getAll();
+      console.log(this.productList);
     }
 
     openModalInsert(event: Event): void {
