@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
-import { Product } from '../models/product';
+import { ProductModel } from '../models/product';
 import { ProductsService } from '../services/products.service';
 import {
   ReactiveFormsModule,
@@ -19,34 +19,36 @@ import {
 export class ProductsModalEditComponent implements OnInit {
   modalForm: FormGroup;
   title: string;
-  product: Product = new Product();
+  // product: Product = new ProductModel();
 
-  constructor(private productService: ProductsService, public bsModalRef: BsModalRef) {}
+  constructor(private productService: ProductsService,
+    public bsModalRef: BsModalRef
+  ) { }
 
   ngOnInit() {
-    this.modalForm = new FormGroup({
-      description: new FormControl(this.product.description, [
-          Validators.required,
-          Validators.minLength(4)
-      ]), 
-      price: new FormControl(this.product.price, [
-        Validators.pattern("\\d{1,}\\.?\\d{1,2}"), 
-        Validators.min(0),
-        Validators.required
-      ]),
-      language: new FormControl() 
-    });
+    // this.modalForm = new FormGroup({
+    //   description: new FormControl(this.product.description, [
+    //     Validators.required,
+    //     Validators.minLength(4)
+    //   ]),
+    //   price: new FormControl(this.product.price, [
+    //     Validators.pattern('\\d{1,}\\.?\\d{1,2}'),
+    //     Validators.min(0),
+    //     Validators.required
+    //   ]),
+    //   language: new FormControl()
+    // });
   }
 
-  onClickSave():void {
-    this.productService.update(this.product).subscribe(
-			response => {
-        this.bsModalRef.hide();
-        this.bsModalRef = null;
-			}, 
-			err => {
-				console.log("Error insert (check node server) ", err);
-		});
+  onClickSave(): void {
+    // this.productService.update(this.product).subscribe(
+    //   response => {
+    //     this.bsModalRef.hide();
+    //     this.bsModalRef = null;
+    //   },
+    //   err => {
+    //     console.log('Error insert (check node server) ', err);
+    //   });
   }
 
 }

@@ -2,9 +2,9 @@ import { throwError as observableThrowError, Observable, Subject, BehaviorSubjec
 
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Response, Headers } from '@angular/http';
+import { Headers } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
-import { Product } from '../models/product';
+import { ProductModel, ProductInterface } from '../models/product';
 
 @Injectable()
 export class ProductsService {
@@ -31,41 +31,34 @@ export class ProductsService {
 
     constructor(private http: HttpClient) { }
 
-
-    // getAll() {
-    //     this.loadingList.next(true);
-    //     this.http.get(this.url).pipe(
-    //         map((res: any) => this.list.next(res)))
-    //         .finally(() => this.loadingList.next(false))
-    //         .catch((error: any) => {
-    //             this.list.error(new Error(error || 'Server error'));
-    //             return observableThrowError(error.json().error || 'Server error');
-    //         }).subscribe();
+    // getAll(): Observable<ProductModel[]> {
+    //     return this.http.get<any>(this.url);
     // }
 
-    getAll() {
-        // this.loadingList.next(true);
-        return this.http.get<any>(this.url).toPromise();
-            // .pipe(map(data => data)).toPromise();
+    getAll(): Observable<ProductModel[]> {
+        return this.http.get(`${this.url}`)
+            .pipe(
+                map((response) => Object.keys(response).map(key => {
+                    const product = { id: key, ...response[key] } as ProductInterface;
+                    return new ProductModel(product);
+                }))
+            );
     }
 
-    // getAll(): Observable<any> {
-    //     this.loadingList.next(true);
-    //     return this.http.get<any>(`${this.url}`);
+    // add(product: Product) {
+    //     return this.http.post(this.url, product, { headers: <any>this.headers });
     // }
 
-    add(product: Product): Observable<void> {
-        return this.http.post(this.url, product, { headers: <any>this.headers }).pipe(
-            map((res: Response) => this.inserted.next(true)));
-    }
+    // update(product: Product) {
+    //     return this.http.put(this.url, product, { headers: <any>this.headers });
+    //     // .pipe(map((res: Response) => this.updated.next(true)));
+    // }
 
-    update(product: Product): Observable<void> {
-        return this.http.put(this.url, product, { headers: <any>this.headers }).pipe(
-            map((res: Response) => this.updated.next(true)));
-    }
+    // update(product: Product) {
+    //     return this.http.put(this.url, product, { headers: <any>this.headers });
+    //   }
 
-    delete(product: Product): Observable<void> {
-        return this.http.delete(`${this.url}/${product._id}`, { headers: <any>this.headers }).pipe(
-            map((res: Response) => this.deleted.next(true)));
-    }
+    // delete(product: Product) {
+    //     return this.http.delete(`${this.url}/${product._id}`, { headers: <any>this.headers });
+    // }
 }

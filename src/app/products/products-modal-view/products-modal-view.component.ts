@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
-import { Product } from '../models/product'
+import { ProductModel, ProductInterface } from '../models/product';
 
 @Component({
   selector: 'app-products-modal-view',
@@ -10,8 +10,10 @@ import { Product } from '../models/product'
 export class ProductsModalViewComponent implements OnInit {
 
   title: string;
-  product: Product = new Product();
-  constructor(public bsModalRef: BsModalRef) {}
+  product: ProductInterface[];
+  constructor(
+    public bsModalRef: BsModalRef
+    ) {}
 
   ngOnInit() {
   }

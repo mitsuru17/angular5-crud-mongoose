@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../services/products.service';
-import { Product } from '../models/product';
+import { ProductModel } from '../models/product';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { ProductsModalInsertComponent } from '../products-modal-insert/products-modal-insert.component';
+import { ProductsModalViewComponent } from '../products-modal-view/products-modal-view.component';
 
 @Component({
     selector: 'app-products-list',
@@ -13,11 +14,14 @@ import { ProductsModalInsertComponent } from '../products-modal-insert/products-
 export class ProductsListComponent implements OnInit {
     public alerts: any = [];
     bsModalRef: BsModalRef;
-    productList: Product[];
+    // productList: Product[];
+    products: ProductModel[];
     loading: boolean;
     inserted: boolean;
 
-    constructor(private productService: ProductsService, private modalService: BsModalService) {
+    constructor(private productService: ProductsService,
+        private modalService: BsModalService
+    ) {
 
         // this.productService.list$.subscribe(
         //     data => {
@@ -67,19 +71,44 @@ export class ProductsListComponent implements OnInit {
         // );
     }
 
-    async ngOnInit() {
-        await this.loadData();
+    ngOnInit() {
+        this.loadData();
     }
 
-    async loadData() {
-      this.productList = await this.productService.getAll();
-      console.log(this.productList);
+    loadData() {
+        this.productService.getAll()
+            .subscribe(
+                res => this.products = res,
+                err => console.log(err),
+            );
+        console.log(this.products);
     }
 
     openModalInsert(event: Event): void {
         event.preventDefault();
-        this.bsModalRef = this.modalService.show(ProductsModalInsertComponent);
-        this.bsModalRef.content.title = `Insert Product`;
+        // this.bsModalRef = this.modalService.show(ProductsModalInsertComponent);
+        // this.bsModalRef.content.title = `Insert Product`;
+    }
+
+    openModalView(product: ProductModel) {
+        this.bsModalRef = this.modalService.show(ProductsModalViewComponent);
+        this.bsModalRef.content.title = `Product ${product.description}`;
+        this.bsModalRef.content.product = product;
+    }
+
+    openModalEdit(product: ProductModel) {
+        // this.bsModalRef = this.modalService.show(ProductsModalEditComponent);
+        // this.bsModalRef.content.title = `Edit Product ${product.description}`;
+        // this.bsModalRef.content.product = product;
+    }
+
+    onClickDeleted(product: ProductModel): void {
+        // this.productService.delete(product).subscribe(
+        //     response => {
+        //     },
+        //     err => {
+        //         console.log('Error delete (check node server) ', err);
+        //     });
     }
 
 

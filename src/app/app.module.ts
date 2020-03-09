@@ -22,16 +22,16 @@ import { HomeIndexComponent } from './home/home-index/home-index.component';
     ProductsListComponent,
     NavbarComponent,
     ProductsModalViewComponent,
-    ProductsListItemComponent,
-    ProductsModalInsertComponent,
+    // ProductsListItemComponent,
+    // ProductsModalInsertComponent,
+    // ProductsModalEditComponent,
     ValidationDirective,
-    ProductsModalEditComponent,
     HomeIndexComponent
   ],
   entryComponents: [
     ProductsModalViewComponent,
-    ProductsModalInsertComponent,
-    ProductsModalEditComponent
+    // ProductsModalInsertComponent,
+    // ProductsModalEditComponent
   ],
   imports: [
     BrowserModule,

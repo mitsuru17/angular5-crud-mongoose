@@ -10,17 +10,24 @@
 <div *ngFor="let alert of alerts">
     <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout">{{ alert.msg }}</alert>
 </div>
-<table class="table ">
+<table class="table">
     <thead class="thead-default">
         <tr>
-            <th>Description {{productList | json}}</th>
+            <th>Description</th>
             <th>Price</th>
             <th>Options</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let product of productList">
-            <app-products-list-item [product]="product"></app-products-list-item>
+        <tr *ngFor="let product of products">
+            <!-- <app-products-list-item [product]="product"></app-products-list-item> -->
+            <td class="w-50">{{product.description | uppercase}} </td>
+            <td class="w-35">{{product.price | currency:'USD':true}} </td>
+            <td class="w-25">
+                <button (click)="openModalView(product)" type="button" class="btn btn-outline-primary"><i class="fa fa-search-plus" aria-hidden="true"></i></button>
+                <button (click)="openModalEdit(product)" type="button" class="btn btn-outline-warning"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                <button (click)="onClickDeleted(product)" type="button" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+            </td>
         </tr>
     </tbody>
 </table>
