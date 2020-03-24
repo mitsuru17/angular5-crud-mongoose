@@ -2,11 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { ProductModel } from '../models/product';
 import { ProductsService } from '../services/products.service';
-import {
-  FormGroup,
-  FormControl,
-  Validators
-} from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-products-modal-insert',
@@ -33,15 +29,17 @@ export class ProductsModalInsertComponent implements OnInit {
     });
   }
 
-  onClickSave(): void {
+  onClickSave() {
     this.productService.add(this.modalForm.value).subscribe(
       (product: ProductModel) => {
         this.bsModalRef.hide();
+        this.bsModalRef = null;
         console.log("Product created, ", product);
       },
       err => {
         console.log('Error insert (check node server) ', err);
-      });
+      }
+    );
   }
 
 }

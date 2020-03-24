@@ -5,6 +5,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { ProductsModalInsertComponent } from '../products-modal-insert/products-modal-insert.component';
 import { ProductsModalViewComponent } from '../products-modal-view/products-modal-view.component';
+import { ProductsModalEditComponent } from '../products-modal-edit/products-modal-edit.component';
 
 @Component({
     selector: 'app-products-list',
@@ -98,18 +99,20 @@ export class ProductsListComponent implements OnInit {
     }
 
     openModalEdit(product: ProductModel) {
-        // this.bsModalRef = this.modalService.show(ProductsModalEditComponent);
-        // this.bsModalRef.content.title = `Edit Product ${product.description}`;
-        // this.bsModalRef.content.product = product;
+        this.bsModalRef = this.modalService.show(ProductsModalEditComponent);
+        this.bsModalRef.content.title = `Edit Product ${product.description}`;
+        this.bsModalRef.content.product = product;
     }
 
-    onClickDeleted(product: ProductModel): void {
-        // this.productService.delete(product).subscribe(
-        //     response => {
-        //     },
-        //     err => {
-        //         console.log('Error delete (check node server) ', err);
-        //     });
+    onClickDeleted(id) {
+        this.productService.delete(id).subscribe(
+            (product: ProductModel) => {
+                console.log("Product deleted, ", product);
+            },
+            err => {
+                console.log('Error delete (check node server) ', err);
+            }
+        );
     }
 
 

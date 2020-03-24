@@ -24,14 +24,14 @@ import { HomeIndexComponent } from './home/home-index/home-index.component';
     ProductsModalViewComponent,
     ProductsListItemComponent,
     ProductsModalInsertComponent,
-    // ProductsModalEditComponent,
+    ProductsModalEditComponent,
     ValidationDirective,
     HomeIndexComponent
   ],
   entryComponents: [
     ProductsModalViewComponent,
     ProductsModalInsertComponent,
-    // ProductsModalEditComponent
+    ProductsModalEditComponent
   ],
   imports: [
     BrowserModule,

@@ -38,11 +38,11 @@ export class ProductsService {
         return this.http.post<ProductModel>(this.url, product, { headers: <any>this.headers });
     }
 
-    update(product: ProductModel) {
+    update(product: ProductModel): Observable<ProductModel> {
         return this.http.put<ProductModel>(this.url, product, { headers: <any>this.headers });
     }
 
-    delete(id: number) {
+    delete(id: string) {
         return this.http.delete<ProductModel>(`${this.url}/${id}`, { headers: <any>this.headers });
     }
 }
