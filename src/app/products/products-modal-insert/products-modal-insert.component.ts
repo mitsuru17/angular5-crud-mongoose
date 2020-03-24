@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-// import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
+import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { ProductModel } from '../models/product';
 import { ProductsService } from '../services/products.service';
 import {
-  ReactiveFormsModule,
-  FormsModule,
   FormGroup,
   FormControl,
-  Validators,
-  FormBuilder
+  Validators
 } from '@angular/forms';
 
 @Component({
@@ -19,35 +16,32 @@ import {
 export class ProductsModalInsertComponent implements OnInit {
   modalForm: FormGroup;
   title: string;
-  // product: Product = new Product();
+  product: ProductModel;
   constructor(private productService: ProductsService,
-    // public bsModalRef: BsModalRef
-    ) { }
+    public bsModalRef: BsModalRef) { }
 
   ngOnInit() {
-    // this.modalForm = new FormGroup({
-    //   description: new FormControl(this.product.description, [
-    //     Validators.required,
-    //     Validators.minLength(4)
-    //   ]),
-    //   price: new FormControl(this.product.price, [
-    //     Validators.pattern('\\d{1,}\\.?\\d{1,2}'),
-    //     Validators.min(0),
-    //     Validators.required
-    //   ]),
-    //   language: new FormControl()
-    // });
+    this.modalForm = new FormGroup({
+      description: new FormControl('', [
+        Validators.required, Validators.minLength(4)
+      ]),
+      price: new FormControl('', [
+        Validators.pattern('\\d{1,}\\.?\\d{1,2}'),
+        Validators.min(0),
+        Validators.required
+      ])
+    });
   }
 
   onClickSave(): void {
-    // this.productService.add(this.product).subscribe(
-    //   response => {
-    //     // this.bsModalRef.hide();
-    //     // this.bsModalRef = null;
-    //   },
-    //   err => {
-    //     console.log('Error insert (check node server) ', err);
-    //   });
+    this.productService.add(this.modalForm.value).subscribe(
+      (product: ProductModel) => {
+        this.bsModalRef.hide();
+        console.log("Product created, ", product);
+      },
+      err => {
+        console.log('Error insert (check node server) ', err);
+      });
   }
 
 }

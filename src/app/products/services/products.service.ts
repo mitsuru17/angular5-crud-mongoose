@@ -1,10 +1,9 @@
 import { throwError as observableThrowError, Observable, Subject, BehaviorSubject } from 'rxjs';
 
-import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Headers } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
-import { ProductModel, ProductInterface } from '../models/product';
+import { ProductModel } from '../models/product';
 
 @Injectable()
 export class ProductsService {
@@ -31,34 +30,19 @@ export class ProductsService {
 
     constructor(private http: HttpClient) { }
 
-    // getAll(): Observable<ProductModel[]> {
-    //     return this.http.get<any>(this.url);
-    // }
-
     getAll(): Observable<ProductModel[]> {
-        return this.http.get(`${this.url}`)
-            .pipe(
-                map((response) => Object.keys(response).map(key => {
-                    const product = { id: key, ...response[key] } as ProductInterface;
-                    return new ProductModel(product);
-                }))
-            );
+        return this.http.get<ProductModel[]>(this.url);
     }
 
-    // add(product: Product) {
-    //     return this.http.post(this.url, product, { headers: <any>this.headers });
-    // }
+    add(product: ProductModel): Observable<ProductModel> {
+        return this.http.post<ProductModel>(this.url, product, { headers: <any>this.headers });
+    }
 
-    // update(product: Product) {
-    //     return this.http.put(this.url, product, { headers: <any>this.headers });
-    //     // .pipe(map((res: Response) => this.updated.next(true)));
-    // }
+    update(product: ProductModel) {
+        return this.http.put<ProductModel>(this.url, product, { headers: <any>this.headers });
+    }
 
-    // update(product: Product) {
-    //     return this.http.put(this.url, product, { headers: <any>this.headers });
-    //   }
-
-    // delete(product: Product) {
-    //     return this.http.delete(`${this.url}/${product._id}`, { headers: <any>this.headers });
-    // }
+    delete(id: number) {
+        return this.http.delete<ProductModel>(`${this.url}/${id}`, { headers: <any>this.headers });
+    }
 }

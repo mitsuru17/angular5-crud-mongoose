@@ -78,16 +78,17 @@ export class ProductsListComponent implements OnInit {
     loadData() {
         this.productService.getAll()
             .subscribe(
-                res => this.products = res,
-                err => console.log(err),
+                (data: any[]) => {
+                    this.products = data;
+                    console.log(data);
+                }
             );
-        console.log(this.products);
     }
 
     openModalInsert(event: Event): void {
         event.preventDefault();
-        // this.bsModalRef = this.modalService.show(ProductsModalInsertComponent);
-        // this.bsModalRef.content.title = `Insert Product`;
+        this.bsModalRef = this.modalService.show(ProductsModalInsertComponent);
+        this.bsModalRef.content.title = `Insert Product`;
     }
 
     openModalView(product: ProductModel) {

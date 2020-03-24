@@ -4,7 +4,8 @@
     </li>
 
     <li class="nav-item">
-        <a (click)="openModalInsert($event)" class="nav-link active" href><i class="fa fa-plus" aria-hidden="true"></i> New Product</a>
+        <a (click)="openModalInsert($event)" class="nav-link active" href><i class="fa fa-plus" aria-hidden="true"></i>
+            New Product</a>
     </li>
 </ul>
 <div *ngFor="let alert of alerts">
@@ -22,11 +23,14 @@
         <tr *ngFor="let product of products">
             <!-- <app-products-list-item [product]="product"></app-products-list-item> -->
             <td class="w-50">{{product.description | uppercase}} </td>
-            <td class="w-35">{{product.price | currency:'USD':true}} </td>
+            <td class="w-35">{{product.price | currency:'USD'}} </td>
             <td class="w-25">
-                <button (click)="openModalView(product)" type="button" class="btn btn-outline-primary"><i class="fa fa-search-plus" aria-hidden="true"></i></button>
-                <button (click)="openModalEdit(product)" type="button" class="btn btn-outline-warning"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                <button (click)="onClickDeleted(product)" type="button" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                <button (click)="openModalView(product)" type="button" class="btn btn-outline-primary"><i
+                        class="fa fa-search-plus" aria-hidden="true"></i></button>
+                <button (click)="openModalEdit(product)" type="button" class="btn btn-outline-warning"><i
+                        class="fa fa-pencil" aria-hidden="true"></i></button>
+                <button (click)="onClickDeleted(product)" type="button" class="btn btn-outline-danger"><i
+                        class="fa fa-trash" aria-hidden="true"></i></button>
             </td>
         </tr>
     </tbody>
