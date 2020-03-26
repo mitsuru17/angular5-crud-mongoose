@@ -8,15 +8,15 @@ const api = require('./server/controllers/index');
 const db = require('./server/config/database');
 
 mongoose.Promise = global.Promise;
-mongoose.connect(db.uri(), { useMongoClient: true });
+mongoose.connect(db.uri());
 
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname, 'dist')));
 
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');

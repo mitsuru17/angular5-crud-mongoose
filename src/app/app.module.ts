@@ -11,7 +11,6 @@ import { ProductsListComponent } from './products/products-list/products-list.co
 import { NavbarComponent } from './common/navbar/navbar.component';
 import { ProductsService } from './products/services/products.service';
 import { ProductsModalViewComponent } from './products/products-modal-view/products-modal-view.component';
-import { ProductsListItemComponent } from './products/products-list-item/products-list-item.component';
 import { ProductsModalInsertComponent } from './products/products-modal-insert/products-modal-insert.component';
 import { ProductsModalEditComponent } from './products/products-modal-edit/products-modal-edit.component';
 import { HomeIndexComponent } from './home/home-index/home-index.component';
@@ -22,7 +21,6 @@ import { HomeIndexComponent } from './home/home-index/home-index.component';
     ProductsListComponent,
     NavbarComponent,
     ProductsModalViewComponent,
-    ProductsListItemComponent,
     ProductsModalInsertComponent,
     ProductsModalEditComponent,
     ValidationDirective,

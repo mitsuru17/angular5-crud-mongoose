@@ -108,12 +108,11 @@ export class ProductsListComponent implements OnInit {
         this.productService.delete(id).subscribe(
             (product: ProductModel) => {
                 console.log("Product deleted, ", product);
+                this.loadData();
             },
             err => {
                 console.log('Error delete (check node server) ', err);
             }
         );
     }
-
-
 }

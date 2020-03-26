@@ -13,10 +13,10 @@ export interface ProductInterface {
 }
 
 export class ProductModel {
-    _id: string;
-    description: string;
-    price: number;
-    __v: number;
+    public _id: string;
+    public description: string;
+    public price: number;
+    public __v: number;
 
     constructor(data: ProductInterface) {
         this._id = data._id || null;

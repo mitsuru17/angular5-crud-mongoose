@@ -9,23 +9,19 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputDescription" class="col-form-label">Description</label>
-                <input formControlName="description" type="text" class="form-control"
-                    [ngClass]="{'is-invalid': modalForm.controls.description.invalid && (modalForm.controls.description.dirty || modalForm.controls.description.touched),'is-valid': modalForm.controls.description.valid && (modalForm.controls.description.dirty || modalForm.controls.description.touched)}">
-                <div *ngIf="modalForm.controls.description.invalid && (modalForm.controls.description.dirty || modalForm.controls.description.touched)"
-                    class="invalid-feedback">
+                <input [(ngModel)]="product.description" formControlName="description" type="text" class="form-control" [ngClass]="{'is-invalid': modalForm.controls.description.invalid && (modalForm.controls.description.dirty || modalForm.controls.description.touched),'is-valid': modalForm.controls.description.valid && (modalForm.controls.description.dirty || modalForm.controls.description.touched)}">
+                <div *ngIf="modalForm.controls.description.invalid && (modalForm.controls.description.dirty || modalForm.controls.description.touched)" class="invalid-feedback">
                     Please provide a valid description
                 </div>
             </div>
             <div class="form-group col-md-6">
                 <label class="col-form-label">Price</label>
-                <input formControlName="price" type="number" class="form-control"
-                    [ngClass]="{'is-invalid': modalForm.controls.price.invalid && (modalForm.controls.price.dirty || modalForm.controls.price.touched),'is-valid': modalForm.controls.price.valid && (modalForm.controls.price.dirty || modalForm.controls.price.touched)}">
-                <div *ngIf="modalForm.controls.price.invalid && (modalForm.controls.price.dirty || modalForm.controls.price.touched)"
-                    class="invalid-feedback">
+                <input [(ngModel)]="product.price" formControlName="price" type="number" class="form-control" [ngClass]="{'is-invalid': modalForm.controls.price.invalid && (modalForm.controls.price.dirty || modalForm.controls.price.touched),'is-valid': modalForm.controls.price.valid && (modalForm.controls.price.dirty || modalForm.controls.price.touched)}">
+                <div *ngIf="modalForm.controls.price.invalid && (modalForm.controls.price.dirty || modalForm.controls.price.touched)" class="invalid-feedback">
                     Please provide a valid price
                 </div>
             </div>
-            <input [value]="[product._id]" type="hidden" formControlName="_id">
+            <input [(ngModel)]="product._id" type="hidden" formControlName="_id">
         </div>
     </div>
     <div class="modal-footer">

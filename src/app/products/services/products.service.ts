@@ -38,7 +38,7 @@ export class ProductsService {
         return this.http.post<ProductModel>(this.url, product, { headers: <any>this.headers });
     }
 
-    update(product: ProductModel): Observable<ProductModel> {
+    update(product: ProductModel[]): Observable<ProductModel> {
         return this.http.put<ProductModel>(this.url, product, { headers: <any>this.headers });
     }
 
